@@ -71,15 +71,15 @@ func (uc *profilesUseCase) generateKeys() ([]byte, []byte, []byte) {
 	return cryptohelper.HexGenerator(16), cryptohelper.HexGenerator(16), cryptohelper.HexGenerator(16)
 }
 
-func (uc *profilesUseCase) splitToChunks(iccID []byte, size int) [][]byte {
-	out := make([][]byte, 0, (len(iccID)/size)+1)
+func (uc *profilesUseCase) splitToChunks(pe []byte, size int) [][]byte {
+	out := make([][]byte, 0, (len(pe)/size)+1)
 
-	for len(iccID) > 0 {
-		out = append(out, iccID[:size])
-		iccID = iccID[size:]
+	for len(pe) > 0 {
+		out = append(out, pe[:size])
+		pe = pe[size:]
 
-		if l := len(iccID); l < size && l%size != 0 {
-			size = len(iccID)
+		if l := len(pe); l < size && l%size != 0 {
+			size = len(pe)
 		}
 	}
 

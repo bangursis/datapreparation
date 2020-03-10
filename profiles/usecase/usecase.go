@@ -52,7 +52,7 @@ func (uc *profilesUseCase) Import(ctx context.Context, filepath string) ([]byte,
 	}
 
 	encKey, macKey, macChaining := uc.generateKeys()
-	chunks := uc.splitToChunks(iccID, 1007)
+	chunks := uc.splitToChunks(pe, 1007)
 	encrypteds := make([][]byte, 0, len(chunks))
 	load := make([][]byte, 0, len(chunks))
 
