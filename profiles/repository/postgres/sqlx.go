@@ -7,7 +7,6 @@ import (
 
 	"github.com/jmoiron/sqlx"
 	"github.com/lib/pq"
-	"github.com/spf13/viper"
 )
 
 type sqlxDB struct {
@@ -29,8 +28,8 @@ func NewSQLX(h, p, u, dbname, pass string) (profiles.Repository, error) {
 
 func (repo *sqlxDB) Save(ctx context.Context, key string, encrypted [][]byte) error {
 	q := fmt.Sprintf(`
-		INSERT INTO %s (ICCID, chunks) VALUES (?, ?) ON CONFLICT DO NOTHING
-	`, viper.GetString("TABLE NAME"))
+		INSERT INTO profiles (ICCID, chunks) VALUES (?, ?) ON CONFLICT DO NOTHING
+	`)
 	q = repo.db.Rebind(q)
 
 	_, err := repo.db.Exec(q, key, pq.Array(encrypted))
