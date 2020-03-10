@@ -23,6 +23,7 @@ func main() {
 		panic(err)
 	}
 
+	runApp()
 	viper.OnConfigChange(func(e fsnotify.Event) {
 		runApp()
 	})
